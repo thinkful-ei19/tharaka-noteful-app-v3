@@ -17,7 +17,7 @@ mongoose.connect(MONGODB_URI)
     //   filter.title = { $regex: re };
     // }
 
-    return Note.find({$text: {search: 'gaga' }})
+    return Note.find({$text: {$search: 'gaga' }})
       .sort('created')
       .then(results => {
         console.log(results);
