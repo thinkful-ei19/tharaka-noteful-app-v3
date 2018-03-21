@@ -11,7 +11,7 @@ const notesRouter = require('./routes/notes');
 
 // Create an Express application
 const app = express();
-
+console.log(process);
 // Log all requests. Skip logging during
 app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'common', {
   skip: () => process.env.NODE_ENV === 'test'
