@@ -90,6 +90,30 @@ describe('Notes API resource', function(){
           expect(res.body.content).to.equal(data.content);
         });
     });
+
+    it('will return incorrect note', function () {
+      // 1) First, call the database
+      let resId, resTitle, resContent;
+      return Note.findOne().select('id title content')
+        .then(res => {
+          //console.log(res.id + 1);
+          // console.log('Note ID', Note.noteId);
+          // console.log('noteId ', noteId);
+          resId = res.id;
+          resTitle = res.title;
+          resContent = res.content;
+          //console.log('Res INFO ', resId, resTitle, resContent);
+          
+          return Note.find({_id:'000000000000000000000001'})
+            .then(res => {
+              //console.log('Res2 INFO ', res.id, res.title, res.content);
+              expect(res.id).to.not.equal(resId);
+              expect(res.title).to.not.equal(resTitle);
+              expect(res.content).to.not.equal(resContent);
+            });
+        });
+
+    });
   });
 
 
